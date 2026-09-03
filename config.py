@@ -43,8 +43,8 @@ class Config:
     # ------------------------------------------------------------------
     # LeetCode
     # ------------------------------------------------------------------
-    LEETCODE_SESSION: str = os.getenv("LEETCODE_SESSION", "")
-    LEETCODE_CSRF_TOKEN: str = os.getenv("LEETCODE_CSRF_TOKEN", "")
+    LEETCODE_SESSION: str = os.getenv("LEETCODE_SESSION", "").strip()
+    LEETCODE_CSRF_TOKEN: str = os.getenv("LEETCODE_CSRF_TOKEN", "").strip()
 
 
 
