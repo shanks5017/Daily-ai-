@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 # openai/gpt-oss-120b is the largest model available on Groq — best for competitive programming.
 # Updated from qwen/qwen3.8-27b which had compile errors on complex C++ problems.
-_MODEL_NAME: str = "llama-3.1-70b-versatile"
+_MODEL_NAME: str = "openai/gpt-oss-120b"
 
 # Seconds to wait before retrying a failed call.
 _RETRY_WAIT: int = 10
