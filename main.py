@@ -36,23 +36,16 @@ from cookie_checker import send_cookie_warnings
 # Platform fetchers — imported lazily inside the pipeline to prevent a single
 # bad import from breaking the entire run.
 import platforms.leetcode as lc_fetcher
-import platforms.codeforces as cf_fetcher
 import platforms.codechef as cc_fetcher
-import platforms.hackerrank as hr_fetcher
 
 from solver.groq_solver import solve_problem
 
 import platforms.submitters.leetcode_submit as lc_submit
-import platforms.submitters.codeforces_submit as cf_submit
 import platforms.submitters.codechef_submit as cc_submit
-import platforms.submitters.hackerrank_submit as hr_submit
 
 _SUBMITTERS = {
     "leetcode": lc_submit.submit_solution,
-    "leetcode_2": lc_submit.submit_solution,
-    "codeforces": cf_submit.submit_solution,
     "codechef": cc_submit.submit_solution,
-    "hackerrank": hr_submit.submit_solution,
 }
 
 
@@ -375,10 +368,7 @@ async def run_daily_bot() -> None:
     # Platform registry — (name, fetch_function) pairs
     platforms: list[tuple[str, object]] = [
         ("leetcode",   lambda: lc_fetcher.fetch_daily_problem("leetcode")),
-        ("leetcode_2", lambda: lc_fetcher.fetch_daily_problem("leetcode_2")),
-        ("codeforces", cf_fetcher.fetch_daily_problem),
         ("codechef",   cc_fetcher.fetch_daily_problem),
-        ("hackerrank", hr_fetcher.fetch_daily_problem),
     ]
 
     succeeded: list[str] = []
@@ -388,7 +378,7 @@ async def run_daily_bot() -> None:
     for platform_name, fetch_fn in platforms:
         # LeetCode requires fresh browser cookies that expire regularly.
         # Skip gracefully instead of failing with a cryptic 403 error.
-        if platform_name.startswith("leetcode") and not Config.has_leetcode_credentials(platform_name):
+        if platform_name.startswith("leetcode") and not Config.has_leetcode_credentials():
             logger.warning(
                 "[%s] Skipping — credentials for %s are not set or have expired.",
                 platform_name.upper(), platform_name

@@ -45,21 +45,8 @@ class Config:
     # ------------------------------------------------------------------
     LEETCODE_SESSION: str = os.getenv("LEETCODE_SESSION", "")
     LEETCODE_CSRF_TOKEN: str = os.getenv("LEETCODE_CSRF_TOKEN", "")
-    LEETCODE_2_SESSION: str = os.getenv("LEETCODE_2_SESSION", "")
-    LEETCODE_2_CSRF_TOKEN: str = os.getenv("LEETCODE_2_CSRF_TOKEN", "")
 
 
-    # ------------------------------------------------------------------
-    # Codeforces
-    # ------------------------------------------------------------------
-    CODEFORCES_API_KEY: str = os.getenv("CODEFORCES_API_KEY", "")
-    CODEFORCES_API_SECRET: str = os.getenv("CODEFORCES_API_SECRET", "")
-    CODEFORCES_HANDLE: str = os.getenv("CODEFORCES_HANDLE", "")
-    CODEFORCES_PASSWORD: str = os.getenv("CODEFORCES_PASSWORD", "")
-    CODEFORCES_39CE7: str = os.getenv("CODEFORCES_39CE7", "")
-    CODEFORCES_JSESSIONID: str = os.getenv("CODEFORCES_JSESSIONID", "")
-    CODEFORCES_X_USER_SHA1: str = os.getenv("CODEFORCES_X_USER_SHA1", "")
-    CODEFORCES_CF_CLEARANCE: str = os.getenv("CODEFORCES_CF_CLEARANCE", "")
 
     # ------------------------------------------------------------------
     # CodeChef — cookie-based auth + password login fallback
@@ -71,12 +58,6 @@ class Config:
     CODECHEF_CF_CLEARANCE: str = os.getenv("CODECHEF_CF_CLEARANCE", "")
     CODECHEF_UID:          str = os.getenv("CODECHEF_UID", "")
     CODECHEF_USERKEY:      str = os.getenv("CODECHEF_USERKEY", "")
-
-    # ------------------------------------------------------------------
-    # HackerRank
-    # ------------------------------------------------------------------
-    HACKERRANK_USERNAME: str = os.getenv("HACKERRANK_USERNAME", "")
-    HACKERRANK_PASSWORD: str = os.getenv("HACKERRANK_PASSWORD", "")
 
 
 
@@ -106,15 +87,8 @@ class Config:
         # Browser session cookies expire frequently; their absence should only skip
         # LeetCode — not crash the entire bot before other platforms run.
         # Use has_leetcode_credentials() to check before the LeetCode pipeline.
-        "CODEFORCES_API_KEY",
-        "CODEFORCES_API_SECRET",
-        "CODEFORCES_HANDLE",
-        # CODEFORCES_PASSWORD is optional — only needed for browser-based submission,
-        # not for problem fetching via the Codeforces API.
         "CODECHEF_AUTH_TOKEN",
         "CODECHEF_SESSION",
-        "HACKERRANK_USERNAME",
-        "HACKERRANK_PASSWORD",
     ]
 
 
@@ -159,7 +133,7 @@ class Config:
             )
 
     @classmethod
-    def has_leetcode_credentials(cls, platform: str = "leetcode") -> bool:
+    def has_leetcode_credentials(cls) -> bool:
         """
         Return True only when both LeetCode auth cookies for the specified
         account are non-empty.
@@ -168,17 +142,9 @@ class Config:
         helper to decide whether to attempt the LeetCode pipeline rather than
         letting it fail deep inside the fetcher or submitter.
 
-        Args:
-            platform (str): The platform/account identifier. Can be 'leetcode' or 'leetcode_2'.
-
         Returns:
             bool: True if correct cookies are set.
         """
-        if platform == "leetcode_2":
-            return bool(
-                cls.LEETCODE_2_SESSION and cls.LEETCODE_2_SESSION.strip()
-                and cls.LEETCODE_2_CSRF_TOKEN and cls.LEETCODE_2_CSRF_TOKEN.strip()
-            )
         return bool(
             cls.LEETCODE_SESSION and cls.LEETCODE_SESSION.strip()
             and cls.LEETCODE_CSRF_TOKEN and cls.LEETCODE_CSRF_TOKEN.strip()

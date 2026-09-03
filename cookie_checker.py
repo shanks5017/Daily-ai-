@@ -177,17 +177,11 @@ def check_all_cookies() -> list[str]:
     checks = [
         # LeetCode JWTs
         lambda: _check_jwt("LEETCODE_SESSION (Account 1)",    Config.LEETCODE_SESSION),
-        lambda: _check_jwt("LEETCODE_SESSION (Account 2)",    Config.LEETCODE_2_SESSION),
 
         # CodeChef JWT
         lambda: _check_jwt("CODECHEF_AUTH_TOKEN",             Config.CODECHEF_AUTH_TOKEN),
 
-        # Codeforces Cloudflare bypass
-        lambda: _check_cf_clearance("CODEFORCES_CF_CLEARANCE", Config.CODEFORCES_CF_CLEARANCE),
 
-        # Codeforces session cookies (plain — just check presence)
-        lambda: _check_plain_cookie("CODEFORCES_39CE7",        Config.CODEFORCES_39CE7),
-        lambda: _check_plain_cookie("CODEFORCES_JSESSIONID",   Config.CODEFORCES_JSESSIONID),
     ]
 
     for check_fn in checks:
