@@ -73,8 +73,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "Varshitha Somashekar"
-          git config --global user.email "varshithasomashekar22@gmail.com"
+          git config --global user.name "shanks5017"
+          git config --global user.email "kit27.cse53@gmail.com"
           git add solutions/
           # Only proceed if there are staged changes
           if git diff --staged --quiet; then
