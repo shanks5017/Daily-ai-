@@ -32,7 +32,7 @@ class Config:
     # ------------------------------------------------------------------
     # Groq AI (FREE — 6,000 requests/day, no credit card)
     # ------------------------------------------------------------------
-    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "").strip()
 
     # ------------------------------------------------------------------
     # Telegram
@@ -51,9 +51,9 @@ class Config:
     # ------------------------------------------------------------------
     # CodeChef — cookie-based auth + password login fallback
     # ------------------------------------------------------------------
-    CODECHEF_USERNAME:     str = os.getenv("CODECHEF_USERNAME", "")
-    CODECHEF_PASSWORD:     str = os.getenv("CODECHEF_PASSWORD", "")
-    CODECHEF_AUTH_TOKEN:   str = os.getenv("CODECHEF_AUTH_TOKEN", "")
+    CODECHEF_USERNAME:     str = os.getenv("CODECHEF_USERNAME", "").strip()
+    CODECHEF_PASSWORD:     str = os.getenv("CODECHEF_PASSWORD", "").strip()
+    CODECHEF_AUTH_TOKEN:   str = os.getenv("CODECHEF_AUTH_TOKEN", "").strip()
     CODECHEF_SESSION:      str = os.getenv("CODECHEF_SESSION", "")
     CODECHEF_CF_CLEARANCE: str = os.getenv("CODECHEF_CF_CLEARANCE", "")
     CODECHEF_UID:          str = os.getenv("CODECHEF_UID", "")
