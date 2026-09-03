@@ -4,19 +4,19 @@ using namespace std;
 class Solution {
 public:
     bool canMakeUniformParity(vector<int>& nums1) {
-        const int INF = 2e9;
-        int minOdd = INF, minEven = INF;
-        int cntOdd = 0, cntEven = 0;
-        for (int x : nums1) {
-            if (x % 2) {
-                cntOdd++;
-                minOdd = min(minOdd, x);
-            } else {
-                cntEven++;
-                minEven = min(minEven, x);
+        if (nums1.empty()) return true;
+        sort(nums1.begin(), nums1.end());
+        int target = nums1[0] & 1; // parity of minimum element
+        bool seen[2] = {false, false};
+        seen[target] = true;
+        for (size_t i = 1; i < nums1.size(); ++i) {
+            int p = nums1[i] & 1;
+            if (p != target) {
+                int needed = p ^ target; // parity of smaller element required
+                if (!seen[needed]) return false;
             }
+            seen[p] = true;
         }
-        if (cntOdd == 0 || cntEven == 0) return true;
-        return minOdd < minEven;
+        return true;
     }
 };
