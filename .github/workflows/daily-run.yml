@@ -2,8 +2,8 @@ name: Daily Coding Bot Run
 
 on:
   schedule:
-    # Runs at 04:00 UTC every day = 9:30 AM IST (UTC+5:30).
-    - cron: '0 4 * * *'
+    # Runs at 08:30 UTC every day = 2:00 PM IST (UTC+5:30).
+    - cron: '30 8 * * *'
   workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
 
 jobs:
