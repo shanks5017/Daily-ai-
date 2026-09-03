@@ -87,8 +87,8 @@ class Config:
         # Browser session cookies expire frequently; their absence should only skip
         # LeetCode — not crash the entire bot before other platforms run.
         # Use has_leetcode_credentials() to check before the LeetCode pipeline.
-        "CODECHEF_AUTH_TOKEN",
-        "CODECHEF_SESSION",
+        "CODECHEF_USERNAME",
+        "CODECHEF_PASSWORD",
     ]
 
 
